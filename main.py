@@ -158,4 +158,50 @@ def startGame():
             elif winning(board, huPlayer):
                 print("Победил человек!")
                 break
-startGame()
+
+
+def startGameBetweenBots(firstBotMove=None):
+    print('Добро пожаловать в крестики-нолики!\n'
+          'Здесь боты играют с ботами!')
+    print("Начнем!")
+    board = [i for i in range(9)]
+    if 1 == 1:
+        huPlayer = "X"
+        aiPlayer = "O"
+        while True:
+            if firstBotMove is None:
+                m = minimax(board, huPlayer)
+                board[m.index] = huPlayer
+            else:
+                m = firstBotMove
+                board[m] = huPlayer
+                firstBotMove = None
+            printBoard(board)
+            print()
+            if is_draw(board):
+                print("Ничья!")
+                break
+            if winning(board, aiPlayer):
+                print("Победил бот 2!")
+                break
+            elif winning(board, huPlayer):
+                print("Победил бот 1!")
+                break
+
+            m = minimax(board, aiPlayer)
+            board[m.index] = aiPlayer
+            printBoard(board)
+            print()
+
+            if winning(board, aiPlayer):
+                print("Победил бот 2!")
+                break
+            elif winning(board, huPlayer):
+                print("Победил бот 1!")
+                break
+            if is_draw(board):
+                print("Ничья!")
+                break
+
+#startGame()
+startGameBetweenBots()
